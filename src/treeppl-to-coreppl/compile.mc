@@ -573,6 +573,34 @@ lang TreePPLCompile
       info = d.info
   }
 
+  | NegBinomialExprTppl d ->
+    TmDist {
+      dist = DNegBinomial {
+        n = compileExprTppl context d.n,
+        p = compileExprTppl context d.prob
+      },
+      ty = tyunknown_,
+      info = d.info
+  }
+
+  | GeometricExprTppl d ->
+    TmDist {
+      dist = DGeometric {
+        p = compileExprTppl context d.prob
+      },
+      ty = tyunknown_,
+      info = d.info
+  }
+
+  | Chi2ExprTppl d ->
+    TmDist {
+      dist = DChi2 {
+        df = compileExprTppl context d.df
+      },
+      ty = tyunknown_,
+      info = d.info
+  }
+
   | VariableExprTppl v ->
     TmVar {
       ident = v.ident.v,

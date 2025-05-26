@@ -554,5 +554,93 @@ function binomialLogScore(x: Int, param: BinomialParam) {
 }
 
 function binomialScore(x: Int, param: BinomialParam) {
-  return binomialPmf(param.prob)(param.n)(x);
+  return binomialPmf(param.prob, param.n, x);
+}
+
+// NegBinomial
+type NegBinomialParam = NegBinomialParam {
+  n: Int,
+  prob: Real
+}
+
+function negBinomial(param: NegBinomialParam) {
+  assume x ~ NegBinomial(param.n, param.prob);
+  return x;
+}
+
+function negBinomialLogScore(x: Int, param: NegBinomialParam) {
+  return negativeBinomialLogPmf(param.n, param.prob, x);
+}
+
+function negBinomialScore(x: Int, param: NegBinomialParam) {
+  return negativeBinomialPmf(param.n, param.prob, x);
+}
+
+// Geometric
+type GeometricParam = GeometricParam {
+  prob: Real
+}
+
+function geometric(param: GeometricParam) {
+  assume x ~ Geometric(param.prob);
+  return x;
+}
+
+function geometricLogScore(x: Int, param: GeometricParam) {
+  return geometricLogPmf(param.prob, x);
+}
+
+function geometricScore(x: Int, param: GeometricParam) {
+  return geometricPmf(param.prob, x);
+}
+
+// Chi2
+type Chi2Param = Chi2Param {
+  df: Int
+}
+
+function chi2(param: Chi2Param) {
+  assume x ~ Chi2(param.df);
+  return x;
+}
+
+function chi2LogScore(x: Real, param: Chi2Param) {
+  return chi2LogPdf(param.df, x);
+}
+
+function chi2Score(x: Real, param: Chi2Param) {
+  return chi2Pdf(param.df, x);
+}
+
+/**
+ *
+ * Pretty prints a two-dimensional tensor
+ *
+ * @param m matrix
+ * @return void
+ */
+function printMtx(m: Matrix[Real]): () {
+  let dimensions = dim(m);
+  printLn( join( [ "[[ "
+                 , int2string( dimensions[1] )
+                 , " x "
+                 , int2string( dimensions[2] )
+                 , " matrix ]]:"
+                 ]
+               )
+         );
+  for i in 1 to (dimensions[1]) {
+    for j in 1 to (dimensions[2]) {
+      print(concat(real2string(mtxGet(i, j, m)), "\t"));
+    }
+    printLn("");
+  }
+  printLn("");
+}
+
+function bool2real(b: Bool): Real {
+  if (b) {
+    return 1.0;
+  }
+  return 0.0;
 }
