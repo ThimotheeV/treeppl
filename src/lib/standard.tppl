@@ -554,7 +554,7 @@ function binomialLogScore(x: Int, param: BinomialParam) {
 }
 
 function binomialScore(x: Int, param: BinomialParam) {
-  return binomialPmf(param.prob, param.n, x);
+  return binomialPmf(param.prob)(param.n)(x);
 }
 
 // NegBinomial
@@ -569,11 +569,11 @@ function negBinomial(param: NegBinomialParam) {
 }
 
 function negBinomialLogScore(x: Int, param: NegBinomialParam) {
-  return negativeBinomialLogPmf(param.n, param.prob, x);
+  return negativeBinomialLogPmf(param.n)(param.prob)(x);
 }
 
 function negBinomialScore(x: Int, param: NegBinomialParam) {
-  return negativeBinomialPmf(param.n, param.prob, x);
+  return negativeBinomialPmf(param.n)(param.prob)(x);
 }
 
 // Geometric
@@ -587,11 +587,11 @@ function geometric(param: GeometricParam) {
 }
 
 function geometricLogScore(x: Int, param: GeometricParam) {
-  return geometricLogPmf(param.prob, x);
+  return geometricLogPmf(param.prob)(x);
 }
 
 function geometricScore(x: Int, param: GeometricParam) {
-  return geometricPmf(param.prob, x);
+  return geometricPmf(param.prob)(x);
 }
 
 // Chi2
@@ -605,11 +605,11 @@ function chi2(param: Chi2Param) {
 }
 
 function chi2LogScore(x: Real, param: Chi2Param) {
-  return chi2LogPdf(param.df, x);
+  return chi2LogPdf(param.df)(x);
 }
 
 function chi2Score(x: Real, param: Chi2Param) {
-  return chi2Pdf(param.df, x);
+  return chi2Pdf(param.df)(x);
 }
 
 /**

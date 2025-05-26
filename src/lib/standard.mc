@@ -4,6 +4,7 @@
 include "common.mc"
 include "string.mc"
 include "ext/mat-ext.mc"
+include "ext/math-ext.mc"
 include "seq.mc"
 
 let _iterateni = lam bound. lam f.
